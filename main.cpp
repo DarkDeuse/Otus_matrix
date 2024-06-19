@@ -1,4 +1,4 @@
-#include "matrix.hpp"
+#include "matrix.h"
 
 int main() {
     // Fill matrix

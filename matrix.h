@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <iterator>
 
-#include "row.hpp"
+#include "row.h"
 
 namespace NMatrix {
 
