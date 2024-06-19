@@ -1,33 +1,36 @@
 #include "matrix.h"
+#include <iostream>
+#include <cassert>
 
-int main() {
-    // Fill matrix
-    NMatrix::TMatrix<int, 0> matrix;
+int main(int, char **) {
+    Matrix<int, -1> matrix;
+    assert(matrix.size() == 0);
+    auto a = matrix[0][0];
+    assert(a == -1);
+    assert(matrix.size() == 0);
+    matrix[100][100] = 314;
+    assert(matrix[100][100] == 314);
+    assert(matrix.size() == 1);
 
-    const std::size_t size = 10;
-
-    // main diagonal
-    for (std::size_t i = 0; i < size; i++) {
-        matrix[i][i] = i;
+    Matrix<int, 0> m0;
+    auto size = 10;
+    auto ij = 0;
+    auto ji = 9;
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            if (i == j) m0[i][j] = ij++;
+            if (i + j == size - 1) m0[i][j] = ji--;
+        }
     }
 
-    // secondary diagonal
-    for (std::size_t i = 0; i < size; i++) {
-        matrix[size - i - 1][i] = i;
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            std::cout << m0[i][j] << ' ';
+        }
+        std::cout << '\n';
     }
 
-    std::cout << std::endl << "Iterate through occupied cells: " << std::endl;
-    for (const auto& record : matrix) {
-        std::size_t rowId;
-        std::size_t colId;
-        std::size_t value;
-        std::tie(rowId, colId, value) = record;
-        std::cout << "rowId: " << rowId << ", colId: " << colId << ", value: " << value << std::endl;
-    }
+    std::cout << m0.size();
 
-    std::cout << std::endl << "Total occupied cells: " << std::endl;
-    std::cout << matrix.Size() << std::endl;
-
-    std::cout << std::endl << "Matrix Dump [1:8][1:8]: " << std::endl;
-    std::cout << matrix.Dump(1, 8, 1, 8) << std::endl;
+    return 0;
 }

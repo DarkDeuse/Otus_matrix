@@ -9,8 +9,7 @@ configure_file(version.h.in version.h)
 
 add_executable(matrix
         main.cpp
-        matrix.h
-        row.h)
+        matrix.h)
 
 set_target_properties(matrix PROPERTIES
 CXX_STANDARD 17
